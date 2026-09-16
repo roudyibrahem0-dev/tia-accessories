@@ -1,0 +1,2 @@
+export function getGreenApiConfig() { return { instanceId: process.env.GREEN_API_INSTANCE_ID || '', token: process.env.GREEN_API_TOKEN || '', chatId: process.env.GREEN_API_CHAT_ID || '' }; }
+export function requireGreenApiInventoryChatId() { const value = process.env.GREEN_API_INVENTORY_CHAT_ID || process.env.GREEN_API_CHAT_ID; if (!value) throw new Error('GREEN_API_INVENTORY_CHAT_ID is not configured'); return value; }

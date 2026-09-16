@@ -1,0 +1,20 @@
+export type DiscountType = 'percent' | 'fixed';
+export type OrderStatus = 'draft' | 'pending' | 'pending_payment' | 'paid' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+export type Product = {
+	id: number;
+	name: string;
+	price: number;
+	material?: string | null;
+	color_finish?: string | null;
+	care_instructions?: string | null;
+	warranty_text?: string | null;
+	stock_qty?: number | null;
+	[key: string]: any;
+};
+export type CartItem = Product & { quantity: number };
+export type Coupon = { id: number; code: string; discount_type?: DiscountType; discount_value?: number; min_order?: number; active?: boolean; used_count?: number; [key: string]: any };
+export type ProductReview = { id: number; customer_name: string; rating: number; comment: string; image_urls?: string[]; [key: string]: any };
+export type Order = { id: number; status: OrderStatus; total_price?: number; items?: any[]; [key: string]: any };
+export type Customer = { id: number; name: string; phone: string; orders?: Order[]; [key: string]: any };
+export type GeneralInventoryItem = { id: number; [key: string]: any };
+export type ProductInventoryRequirement = { product_id?: number; general_inventory_id?: number; quantity_per_product?: number; [key: string]: any };

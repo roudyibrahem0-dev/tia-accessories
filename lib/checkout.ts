@@ -1,0 +1,5 @@
+import type { CartItem, Coupon } from './types';
+export function buildCheckoutItems(cart: CartItem[]) { return cart.map((item) => ({ product_id: item.id, name: item.name, quantity: item.quantity, price: item.price, unitPrice: item.price })); }
+export function validateCheckoutInput(input: { cart: CartItem[]; customerName: string; phone: string; location: string; appliedCoupon: Coupon | null; subtotal: number }) { if (!input.cart.length) return { ok: false, message: 'السلة فارغة' }; if (!input.customerName.trim()) return { ok: false, message: 'أدخل اسم الزبون' }; if (!input.phone.trim()) return { ok: false, message: 'أدخل رقم الهاتف' }; if (!input.location.trim()) return { ok: false, message: 'أدخل العنوان' }; return { ok: true, message: '' }; }
+export function validateCouponForOrder() { return { ok: true, message: '' }; }
+export function getCouponValue(coupon: Coupon | null, subtotal: number) { if (!coupon) return 0; const value = Number(coupon.discount_value || 0); return coupon.discount_type === 'percent' ? subtotal * value / 100 : Math.min(subtotal, value); }
